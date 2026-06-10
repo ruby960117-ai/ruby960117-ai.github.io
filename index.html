@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUBY☆RUBY | Personal Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="img/ice.jpg">
+</head>
+<body>
+
+    <div id="loader-wrapper">
+    <div class="loader-content">
+        <img src="img/star.gif" alt="Loading...">
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+    </div>
+</div>
+
+<div class="running-star">
+    <img src="img/run.gif" style="width: 100%;">
+</div>
+
+    <header class="navbar">
+        <div class="logo">RUBY☆RUBY</div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#works" class="nav-link">Works</a></li>
+                <li><a href="#exhibitions" class="nav-link">Exhibitions</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="floating-search">
+    <button id="search-btn">🔍</button>
+    <input type="text" id="search-input" placeholder="搜尋..." />
+</div>
+
+<div class="floating-music">
+    <button id="music-btn">🎵</button>
+</div>
+<audio id="main-audio" loop>
+    <source src="music/cute.mp3" type="audio/mpeg">
+</audio>
+
+<button id="chatBtn" style="position: fixed; bottom: 410px; right: 20px; width: 40px; height: 40px; border-radius: 50%; background-color: #dccdbc; color: white; border: none; font-size:20px; cursor: pointer; z-index: 9999;">
+    💭
+</button>
+<div id="chatModal" style="display: none; position: fixed; bottom: 100px; right: 20px; width: 400px; height: 300px; background: rgb(218, 253, 234); border: 1px solid #3e2f23; padding: 10px; z-index: 9999;">
+    <h3>聊天室</h3>
+    <div id="messages" style="height: 220px; overflow-y: scroll;"></div>
+    <input id="msgInput" type="text" placeholder="輸入訊息...">
+    <button id="sendBtn">送出</button>
+</div> 
+
+<section id="home" class="section-home">
+    <div class="slider-container">
+        <div class="star-decor left-star">★</div>
+
+        <div class="slider">
+            <button class="slider-btn prev-btn">&lt;</button>
+            
+            <div class="slide-wrapper">
+                <div class="slider-track">
+                    <img src="img/slide1.png" alt="Sketch 1">
+                    <img src="img/slide2.png" alt="Sketch 2">
+                    <img src="img/slide3.jpg" alt="Sketch 3">
+                    <img src="img/slide4.jpg" alt="Sketch 4">
+                    <img src="img/slide5.png" alt="Sketch 5">
+                    <img src="img/slide6.jpg" alt="Sketch 6">
+                </div>
+            </div>
+            
+            <button class="slider-btn next-btn">&gt;</button>
+        </div>
+
+        <div class="star-decor right-star">★</div>
+    </div>
+</section>
+    <section id="about" class="section-about">
+        <div class="about-hero" style="background-image: url('img/about_profile.jpg');">
+            <div class="about-overlay-text">
+                <h2>YU AN-CHANG</h2>
+                <hr>
+               <p><span id="typing-about"></span></p>
+            </div>
+        </div>
+
+        <div class="learning-section">
+            <h3 class="section-title">LEARNING ON</h3>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="img/skill1.png" alt="Interactive">
+                    <div class="grid-info">
+                        <h4>Interactive</h4>
+                        <p>touchdesigner, max</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="img/skill2.jpg" alt="Graphic design">
+                    <div class="grid-info">
+                        <h4>Graphic design</h4>
+                        <p>photoshop, adobe illustrator</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="img/skill3.png" alt="Modeling">
+                    <div class="grid-info">
+                        <h4>Modeling</h4>
+                        <p>blender, unity, sketch up</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="img/skill4.jpg" alt="Painting">
+                    <div class="grid-info">
+                        <h4>Painting</h4>
+                        <p>acrylic, oil painting, watercolor, computer graphics</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="img/skill5.jpg" alt="Mechatronics">
+                    <div class="grid-info">
+                        <h4>Mechatronics</h4>
+                        <p>arduino</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <img src="img/skill6.jpg" alt="Filmmaking">
+                    <div class="grid-info">
+                        <h4>Filmmaking</h4>
+                        <p>camera, lighting, premiere pro, davinci</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="section-works" >
+        <h3 class="section-title-light">WORKS</h3>
+        
+        <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+            <div class="work-media">
+                <img src="img/work1.jpg" alt="GOOD" >
+            </div>
+            <div class="work-desc">
+                <h4>《GOOD》</h4>
+                <p class="year-tag">2026 / 互動影像</p>
+                <p class="tech-tag">webcam, touchdesigner</p>
+            </div>
+        </div>
+
+        <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+    <a href="https://youtu.be/ki0lfYt9MFc?si=P5U1xMuyy1daOOF0" target="_blank" class="video-link-wrapper">
+        <div class="video-fake-poster">
+            <img src="img/work2.jpg" alt="共鳴距離封面" class="poster-img">
+            <div class="fake-play-btn">
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </a>
+
+    <div class="work-desc">
+        <h4>《共鳴距離》</h4>
+        <p class="year-tag">2025 / 錄像</p>
+    </div>
+</div>
+
+
+        
+
+       <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+    <a href="https://youtu.be/hj6s_FwuHKA?si=F5tLaf5KCGFNMXrD" target="_blank" class="video-link-wrapper">
+        <div class="video-fake-poster">
+            <img src="img/work3.jpg" alt="滲透計畫封面" class="poster-img">
+            <div class="fake-play-btn">
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </a>
+
+    <div class="work-desc">
+        <h4>《滲透計畫》</h4>
+        <p class="year-tag">2025 / 錄像</p>
+    </div>
+</div>
+
+
+         <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+            <div class="work-media">
+                <img src="img/work4.jpg" alt="   ">
+            </div>
+            <div class="work-desc">
+                <h4>《   》系列-1、2、3</h4>
+                <p class="year-tag">2025 / 圖像後製</p>
+                <p class="tech-tag">photoshop</p>
+            </div>
+        </div>
+        </div>
+         <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+            <div class="work-media">
+                <img src="img/work5.jpg" alt="DASK">
+            </div>
+            <div class="work-desc">
+                <h4>《DASK》</h4>
+                <p class="year-tag">2025 / 圖像後製</p>
+                <p class="tech-tag">photoshop</p>
+            </div>
+        </div>
+
+<div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+    <a href="https://youtu.be/esNXEVDezg4?si=BduurkKWNDMdJc2C" target="_blank" class="video-link-wrapper">
+        <div class="video-fake-poster">
+            <img src="img/work7.jpg" alt="輪迴封面" class="poster-img">
+            <div class="fake-play-btn">
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </a>
+
+    <div class="work-desc">
+        <h4>《輪迴》</h4>
+        <p class="year-tag">2025 / 裝置</p>
+    </div>
+</div>
+
+        <div class="work-row"data-aos="fade-up" data-aos-duration="1000">
+    <a href="https://youtu.be/wTClYydb01g" target="_blank" class="video-link-wrapper">
+        <div class="video-fake-poster">
+            <img src="img/work6.jpg" alt="機器封面" class="poster-img">
+            <div class="fake-play-btn">
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </a>
+
+    <div class="work-desc">
+        <h4>《機器人也有小情緒》</h4>
+        <p class="year-tag">2025 / 互動影像 穿戴裝置</p>
+    </div>
+</div>
+
+    </section>
+
+    <section id="exhibitions" class="section-exhibitions">
+        <div class="ex-bg-star"data-aos="fade-up" data-aos-duration="1000">★</div>
+        <h3 class="section-title">EXHIBITIONS</h3>
+        
+        <div class="ex-table"data-aos="fade-up" data-aos-duration="1000">
+           <div class="ex-row">
+               <div class="ex-year">2025</div>
+               <div class="ex-name">
+                   <a href="https://www.instagram.com/p/DI-sF3QzCwx/?img_index=2" target="_blank">「下輩子」</a>
+               </div>
+               <div class="ex-location">師大附中，臺北</div>
+            </div>
+            <div class="ex-row">
+                <div class="ex-year">2024</div>
+                <div class="ex-name">
+                    <a href="https://www.instagram.com/p/C6qzJCnPIWD/?img_index=2" target="_blank">「我跟張大千請示過，當天他給我九個笑杯」</a>
+                </div>    
+                <div class="ex-location">師大附中，臺北</div>
+            </div>
+            <div class="ex-row">
+                <div class="ex-year">2024</div>
+                <div class="ex-name">
+                    <a href="https://www.instagram.com/p/C5FZQeIJwtk/?img_index=2" target="_blank">「未完待續 To be continued」</a>
+                </div>
+                <div class="ex-location">師大附中，臺北</div>
+            </div>
+            <div class="ex-row">
+                <div class="ex-year">2023</div>
+                <div class="ex-name">
+                    <a href="https://www.instagram.com/p/C1Ei4NKJeHD/" target="_blank">「怠惰期」</a>
+                </div>
+                <div class="ex-location">師大附中，臺北</div>
+            </div>
+            <div class="ex-row">
+                <div class="ex-year">2023</div>
+                <div class="ex-name">
+                    <a href="https://www.instagram.com/p/CtS40_NJTKy/" target="_blank">「淺灰色地帶」</a>
+                </div>
+                <div class="ex-location">師大附中，臺北</div>
+            </div>
+            <div class="ex-row">
+                <div class="ex-year">2022</div>
+                <div class="ex-name">
+                    <a href="https://www.instagram.com/p/CmocBJZppFw/" target="_blank">「綿雨透蝕」</a>
+                </div>
+                <div class="ex-location">師大附中，臺北</div>
+            </div>
+        </div>
+
+       <div class="youtube-section">
+    <h4 class="yt-title" >MY YOUTUBE CHANNEL</h4>
+    
+    <a href="https://www.youtube.com/watch?v=W4sqgQeWGT4" target="_blank" class="video-link-wrapper" >
+        <div class="video-fake-poster"data-aos="fade-up" data-aos-duration="1000">
+            <img src="img/youtube_cover.png" alt="My YouTube Video" class="poster-img">
+            
+            <div class="fake-play-btn">
+                <div class="triangle"></div>
+            </div>
+        </div>
+    </a>
+</div>
+    </section>
+
+   <div  id="contact" class="contact-top">
+    <div class="contact-info-left"data-aos="fade-up" data-aos-duration="1000">
+        <h3>Get in touch</h3>
+        <p>📍 Taipei, Taiwan</p>
+        <p>✉️ <a href="img/email.png" target="_blank" style="color: #4A3631 ">ruby.960117@gmail.com</a></p>
+    </div>
+    
+    <div class="map-container"data-aos="fade-up" data-aos-duration="1000">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5108.271940472009!2d121.46844341362055!3d25.13252184680488!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442af74e089a843%3A0xdb8ca79d02e5fe2a!2z5ZyL56uL6Ie65YyX6Jed6KGT5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1780290945124!5m2!1szh-TW!2stw" 
+                width="600" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+
+        <footer class="footer-content">
+           <footer class="footer-content">
+    <div class="footer-brand"data-aos="fade-up" data-aos-duration="1000">
+        <div id="p5-footer-star"></div>
+    </div>
+    </footer>
+            <div class="footer-links"data-aos="fade-up" data-aos-duration="2000">
+                <h4>Contact</h4>
+                <p>✉️ <a href="img/email.png" >ruby.960117@gmail.com</a></p>
+            </div>
+            <div class="footer-links"data-aos="fade-up" data-aos-duration="2000">
+                <h4>Navigation</h4>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#about">About</a></p>
+                <p><a href="#works">Works</a></p>
+                <p><a href="#exhibitions">Exhibitions</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+
+            <div id="secret-overlay" class="secret-overlay">
+   
+
+            <div class="footer-links"data-aos="fade-up" data-aos-duration="2000">
+                <h4>Social media</h4>
+                <p>📷  <a href="https://www.instagram.com/rub_y.117/" target="_blank">Instagram</a></p>
+                <p>💬  <a href="img/line.png" target="_blank">Line</a></p>
+            </div>
+        </footer>
+        <div class="footer-bottom">
+    <div class="static-text">☆.。 .:*・ °☆.。.☆ .。.* RUBY☆RUBY  .。.:*.:・°☆.。.・°☆。.:</div>
+</div>
+    </section>
+
+
+    
+
+    <div class="trail">★</div>
+<div class="trail">★</div>
+<div class="trail">★</div>
+ <div class="trail">★</div>
+<div class="trail">★</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+    // 1. 初始化 Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDsW-cwkcrpX3PRTNNXMT-iFkvr_SXwvb8",
+        authDomain: "ruby-ab3bf.firebaseapp.com",
+        databaseURL: "https://ruby-ab3bf-default-rtdb.firebaseio.com",
+        projectId: "ruby-ab3bf",
+        storageBucket: "ruby-ab3bf.appspot.com",
+        messagingSenderId: "190420097008",
+        appId: "1:190420097008:web:916ca90eb5853d71e76f35"
+    };
+   firebase.initializeApp(firebaseConfig);
+    window.messagesRef = firebase.database().ref('messages');
+
+    // 2. 整合所有互動邏輯
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- A. 聊天室區 ---
+        const chatBtn = document.getElementById('chatBtn');
+        const chatModal = document.getElementById('chatModal');
+        const sendBtn = document.getElementById('sendBtn');
+        const msgInput = document.getElementById('msgInput');
+        const messagesDiv = document.getElementById('messages');
+
+        // 開關視窗
+        if (chatBtn && chatModal) {
+            chatBtn.addEventListener('click', () => {
+                const style = window.getComputedStyle(chatModal);
+                chatModal.style.display = (style.display === 'none') ? 'block' : 'none';
+            });
+        }
+
+        // 發送訊息
+        if (sendBtn && msgInput) {
+            sendBtn.addEventListener('click', () => {
+                const text = msgInput.value.trim();
+                if (text !== "") {
+                    messagesRef.push({ text: text });
+                    msgInput.value = '';
+                }
+            });
+        }
+
+        // 即時接收資料
+        messagesRef.on('value', (snapshot) => {
+            if (messagesDiv) {
+                messagesDiv.innerHTML = '';
+                snapshot.forEach((child) => {
+                    messagesDiv.innerHTML += `<p>${child.val().text}</p>`;
+                });
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        });
+
+        // --- B. 搜尋區 ---
+        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search-input');
+        
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', () => {
+                searchInput.classList.toggle('active');
+                if (searchInput.classList.contains('active')) searchInput.focus();
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.toLowerCase().trim();
+                    const elements = document.querySelectorAll('h3, h4, .ex-row,.grid-item, .work-desc, .contact-info-left, .footer-links');
+                    let found = false;
+                    for (let el of elements) {
+                        if (el.textContent.toLowerCase().includes(query)) {
+                            el.scrollIntoView({ behavior: 'smooth' });
+                            el.style.backgroundColor = "pink";
+                            setTimeout(() => el.style.backgroundColor = "transparent", 2000);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) alert("找不到相關內容");
+                }
+            });
+        }
+    });
+</script>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script src="script.js"></script> 
+
+</body>
+</html>
