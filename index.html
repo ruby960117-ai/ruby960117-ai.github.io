@@ -377,33 +377,92 @@
 <script>
   AOS.init();
 </script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
 <script>
-  // 2. 直接在這裡初始化，不要放在外部檔案
-  const firebaseConfig = {
-      apiKey: "AIzaSyDsW-cwkcrpX3PRTNNXMT-iFkvr_SXwvb8",
-      authDomain: "ruby-ab3bf.firebaseapp.com",
-      databaseURL: "https://ruby-ab3bf-default-rtdb.firebaseio.com",
-      projectId: "ruby-ab3bf",
-      storageBucket: "ruby-ab3bf.appspot.com",
-      messagingSenderId: "190420097008",
-      appId: "1:190420097008:web:916ca90eb5853d71e76f35"
-  };
+    // 1. 初始化 Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDsW-cwkcrpX3PRTNNXMT-iFkvr_SXwvb8",
+        authDomain: "ruby-ab3bf.firebaseapp.com",
+        databaseURL: "https://ruby-ab3bf-default-rtdb.firebaseio.com",
+        projectId: "ruby-ab3bf",
+        storageBucket: "ruby-ab3bf.appspot.com",
+        messagingSenderId: "190420097008",
+        appId: "1:190420097008:web:916ca90eb5853d71e76f35"
+    };
+   firebase.initializeApp(firebaseConfig);
+    window.messagesRef = firebase.database().ref('messages');
 
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-  
-  // 3. 立即進行連線測試
-  database.ref('test_connection').set("Hello World!")
-    .then(() => console.log("【成功】Firebase 已連線！"))
-    .catch((err) => console.error("【失敗】錯誤訊息：", err));
+    // 2. 整合所有互動邏輯
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- A. 聊天室區 ---
+        const chatBtn = document.getElementById('chatBtn');
+        const chatModal = document.getElementById('chatModal');
+        const sendBtn = document.getElementById('sendBtn');
+        const msgInput = document.getElementById('msgInput');
+        const messagesDiv = document.getElementById('messages');
+
+        // 開關視窗
+        if (chatBtn && chatModal) {
+            chatBtn.addEventListener('click', () => {
+                const style = window.getComputedStyle(chatModal);
+                chatModal.style.display = (style.display === 'none') ? 'block' : 'none';
+            });
+        }
+
+        // 發送訊息
+        if (sendBtn && msgInput) {
+            sendBtn.addEventListener('click', () => {
+                const text = msgInput.value.trim();
+                if (text !== "") {
+                    messagesRef.push({ text: text });
+                    msgInput.value = '';
+                }
+            });
+        }
+
+        // 即時接收資料
+        messagesRef.on('value', (snapshot) => {
+            if (messagesDiv) {
+                messagesDiv.innerHTML = '';
+                snapshot.forEach((child) => {
+                    messagesDiv.innerHTML += `<p>${child.val().text}</p>`;
+                });
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        });
+
+        // --- B. 搜尋區 ---
+        const searchBtn = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search-input');
+        
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', () => {
+                searchInput.classList.toggle('active');
+                if (searchInput.classList.contains('active')) searchInput.focus();
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.toLowerCase().trim();
+                    const elements = document.querySelectorAll('h3, h4, .ex-row,.grid-item, .work-desc, .contact-info-left, .footer-links');
+                    let found = false;
+                    for (let el of elements) {
+                        if (el.textContent.toLowerCase().includes(query)) {
+                            el.scrollIntoView({ behavior: 'smooth' });
+                            el.style.backgroundColor = "pink";
+                            setTimeout(() => el.style.backgroundColor = "transparent", 2000);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) alert("找不到相關內容");
+                }
+            });
+        }
+    });
 </script>
-
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="script.js"></script> 
-
 </body>
 </html>
