@@ -425,15 +425,15 @@
 
         // 即時接收資料
         messagesRef.on('value', (snapshot) => {
-            if (messagesDiv) {
-                messagesDiv.innerHTML = '';
-                snapshot.forEach((child) => {
-                    messagesDiv.innerHTML += `<p>${child.val().text}</p>`;
-                });
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }
+    if (messagesDiv) {
+        messagesDiv.innerHTML = ''; // 清空原本內容
+        snapshot.forEach((child) => {
+            // 這就是你問的那一行：將 Firebase 裡的資料轉成 <p> 標籤並顯示
+            messagesDiv.innerHTML += `<p>${child.val().text}</p>`; 
         });
-
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // 自動捲動到底部
+    }
+});
         // --- B. 搜尋區 ---
         const searchBtn = document.getElementById('search-btn');
         const searchInput = document.getElementById('search-input');
