@@ -378,8 +378,8 @@
   AOS.init();
 </script>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
 
 <script>
     // 1. 初始化 Firebase
@@ -393,6 +393,13 @@
         appId: "1:190420097008:web:916ca90eb5853d71e76f35"
     };
    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
+console.log("Firebase 嘗試初始化中..."); // 這行會出現嗎？
+
+const testRef = firebase.database().ref('test');
+testRef.set({ message: "連線測試成功！" })
+    .then(() => console.log("連線成功！資料已寫入！"))
+    .catch((error) => console.error("連線失敗，錯誤訊息：", error));
     window.messagesRef = firebase.database().ref('messages');
 
     // 2. 整合所有互動邏輯
