@@ -381,28 +381,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
 <script>
-    /// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDsW-cwkcrpX3PRTNNXMT-iFkvr_SXwvb8",
-  authDomain: "ruby-ab3bf.firebaseapp.com",
-  databaseURL: "https://ruby-ab3bf-default-rtdb.firebaseio.com",
-  projectId: "ruby-ab3bf",
-  storageBucket: "ruby-ab3bf.firebasestorage.app",
-  messagingSenderId: "190420097008",
-  appId: "1:190420097008:web:916ca90eb5853d71e76f35",
-  measurementId: "G-8ZL3V82PNV"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+    const firebaseConfig = {
+        apiKey: "AIzaSyDsW-cwkcrpX3PRTNNXMT-iFkvr_SXwvb8",
+        authDomain: "ruby-ab3bf.firebaseapp.com",
+        databaseURL: "https://ruby-ab3bf-default-rtdb.firebaseio.com",
+        projectId: "ruby-ab3bf",
+        storageBucket: "ruby-ab3bf.appspot.com",
+        messagingSenderId: "190420097008",
+        appId: "1:190420097008:web:916ca90eb5853d71e76f35"
+    };
    firebase.initializeApp(firebaseConfig);
     window.messagesRef = firebase.database().ref('messages');
 
